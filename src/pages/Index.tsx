@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Github, ExternalLink, Mail, LinkedIn, User, Bot, BarChart3, GitCompare } from "lucide-react";
+import { Github, ExternalLink, Mail, Linkedin, User, Bot, BarChart3, GitCompare } from "lucide-react";
 import PersonalInfo from "@/components/cv/PersonalInfo";
 import Experience from "@/components/cv/Experience";
 import Education from "@/components/cv/Education";
