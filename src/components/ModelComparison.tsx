@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -201,7 +200,7 @@ const ModelComparison = () => {
                             <td key={model.id} className="text-center p-3">
                               <div className="flex items-center justify-center space-x-2">
                                 <span>
-                                  {typeof value === 'number' ? metric.format(value) : value}
+                                  {typeof value === 'number' ? (metric.format as (v: number) => string)(value) : (metric.format as (v: string) => string)(value as string)}
                                 </span>
                                 {isBest && <CheckCircle className="h-4 w-4 text-green-600" />}
                               </div>
