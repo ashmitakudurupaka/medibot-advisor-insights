@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -100,12 +101,15 @@ const ModelComparison = () => {
     const values = models.map(m => {
       switch (metric) {
         case "rouge1":
+          return m.metrics.rouge1;
         case "rouge2":
+          return m.metrics.rouge2;
         case "rougeL":
-          return m.metrics[metric as keyof typeof m.metrics] as number;
+          return m.metrics.rougeL;
         case "perplexity":
+          return -m.metrics.perplexity; // Lower is better
         case "latency":
-          return -(m.metrics[metric as keyof typeof m.metrics] as number); // Lower is better
+          return -m.metrics.latency; // Lower is better
         default:
           return 0;
       }
@@ -196,7 +200,9 @@ const ModelComparison = () => {
                           return (
                             <td key={model.id} className="text-center p-3">
                               <div className="flex items-center justify-center space-x-2">
-                                <span>{typeof value === 'number' ? metric.format(value) : value}</span>
+                                <span>
+                                  {typeof value === 'number' ? metric.format(value) : value}
+                                </span>
                                 {isBest && <CheckCircle className="h-4 w-4 text-green-600" />}
                               </div>
                             </td>
