@@ -271,7 +271,7 @@ const Index = () => {
                   <span>john.doe@email.com</span>
                 </Button>
                 <Button variant="outline" size="sm" className="flex items-center space-x-2">
-                  <LinkedIn className="h-4 w-4" />
+                  <Linkedin className="h-4 w-4" />
                   <span>LinkedIn</span>
                 </Button>
                 <Button variant="outline" size="sm" className="flex items-center space-x-2">
