@@ -1,9 +1,21 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from "recharts";
 import { TrendingUp, Clock, Database, Zap, Target, Shield } from "lucide-react";
+
+interface MedicalMetrics {
+  precision: number;
+  recall: number;
+  f1: number;
+}
+
+interface MedicalCategory {
+  category: string;
+  promptTuning: MedicalMetrics;
+  peftLora: MedicalMetrics;
+  qlora: MedicalMetrics;
+}
 
 const PerformanceMetrics = () => {
   const trainingData = [
@@ -30,7 +42,7 @@ const PerformanceMetrics = () => {
     { subject: "Medical Accuracy", promptTuning: 65, peftLora: 80, qlora: 90 },
   ];
 
-  const medicalMetrics = [
+  const medicalMetrics: MedicalCategory[] = [
     {
       category: "Diagnostic Accuracy",
       promptTuning: { precision: 0.72, recall: 0.68, f1: 0.70 },
@@ -179,25 +191,28 @@ const PerformanceMetrics = () => {
                     </CardHeader>
                     <CardContent>
                       <div className="grid grid-cols-3 gap-4">
-                        {Object.entries(category).slice(1).map(([model, metrics]) => (
-                          <div key={model} className="text-center p-4 bg-gray-50 rounded-lg">
-                            <h4 className="font-medium mb-3 capitalize">{model.replace(/([A-Z])/g, ' $1').trim()}</h4>
-                            <div className="space-y-2">
-                              <div className="flex justify-between">
-                                <span className="text-sm">Precision:</span>
-                                <Badge variant="outline">{(metrics.precision * 100).toFixed(1)}%</Badge>
-                              </div>
-                              <div className="flex justify-between">
-                                <span className="text-sm">Recall:</span>
-                                <Badge variant="outline">{(metrics.recall * 100).toFixed(1)}%</Badge>
-                              </div>
-                              <div className="flex justify-between">
-                                <span className="text-sm">F1-Score:</span>
-                                <Badge variant="outline">{(metrics.f1 * 100).toFixed(1)}%</Badge>
+                        {(['promptTuning', 'peftLora', 'qlora'] as const).map((model) => {
+                          const metrics = category[model];
+                          return (
+                            <div key={model} className="text-center p-4 bg-gray-50 rounded-lg">
+                              <h4 className="font-medium mb-3 capitalize">{model.replace(/([A-Z])/g, ' $1').trim()}</h4>
+                              <div className="space-y-2">
+                                <div className="flex justify-between">
+                                  <span className="text-sm">Precision:</span>
+                                  <Badge variant="outline">{(metrics.precision * 100).toFixed(1)}%</Badge>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span className="text-sm">Recall:</span>
+                                  <Badge variant="outline">{(metrics.recall * 100).toFixed(1)}%</Badge>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span className="text-sm">F1-Score:</span>
+                                  <Badge variant="outline">{(metrics.f1 * 100).toFixed(1)}%</Badge>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        ))}
+                          );
+                        })}
                       </div>
                     </CardContent>
                   </Card>
