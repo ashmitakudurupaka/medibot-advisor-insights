@@ -2,89 +2,119 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { MessageSquare, Activity, BarChart3, Shield, Clock, Brain } from "lucide-react";
-import ChatInterface from "@/components/ChatInterface";
-import ModelComparison from "@/components/ModelComparison";
-import PerformanceMetrics from "@/components/PerformanceMetrics";
+import { User, Mail, Phone, MapPin, Github, Linkedin, Download } from "lucide-react";
+import PersonalInfo from "@/components/cv/PersonalInfo";
+import Experience from "@/components/cv/Experience";
+import Education from "@/components/cv/Education";
+import Skills from "@/components/cv/Skills";
+import Projects from "@/components/cv/Projects";
+import Contact from "@/components/cv/Contact";
 
 const Index = () => {
-  const [activeTab, setActiveTab] = useState("chat");
+  const [activeTab, setActiveTab] = useState("about");
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-teal-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
       {/* Header */}
-      <header className="bg-white border-b border-blue-100 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-6">
+      <header className="bg-white/80 backdrop-blur-sm border-b border-slate-200 shadow-sm sticky top-0 z-50">
+        <div className="max-w-6xl mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="bg-blue-600 p-2 rounded-lg">
-                <Activity className="h-6 w-6 text-white" />
+            <div className="flex items-center space-x-4">
+              <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-3 rounded-full">
+                <User className="h-8 w-8 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">MedAI Assistant</h1>
-                <p className="text-sm text-gray-600">AI-Powered Medical Guidance System</p>
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+                  John Doe
+                </h1>
+                <p className="text-lg text-slate-600">Full Stack Developer</p>
               </div>
             </div>
-            <div className="flex items-center space-x-2">
-              <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-                <Shield className="h-3 w-3 mr-1" />
-                HIPAA Compliant
-              </Badge>
-              <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
-                <Brain className="h-3 w-3 mr-1" />
-                ML Research
-              </Badge>
+            <div className="flex items-center space-x-3">
+              <Button variant="outline" className="flex items-center space-x-2">
+                <Download className="h-4 w-4" />
+                <span>Download CV</span>
+              </Button>
+              <Button className="flex items-center space-x-2">
+                <Mail className="h-4 w-4" />
+                <span>Contact Me</span>
+              </Button>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Medical Disclaimer */}
-      <div className="max-w-7xl mx-auto px-4 py-4">
-        <Alert className="bg-amber-50 border-amber-200">
-          <Shield className="h-4 w-4 text-amber-600" />
-          <AlertDescription className="text-amber-800">
-            <strong>Important Medical Disclaimer:</strong> This AI system provides informational guidance only and does not replace professional medical diagnosis or treatment. Always consult with qualified healthcare providers for medical decisions.
-          </AlertDescription>
-        </Alert>
-      </div>
-
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 pb-8">
+      <div className="max-w-6xl mx-auto px-4 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mb-6">
-            <TabsTrigger value="chat" className="flex items-center space-x-2">
-              <MessageSquare className="h-4 w-4" />
-              <span>AI Consultation</span>
+          <TabsList className="grid w-full grid-cols-6 mb-8 bg-white/50 backdrop-blur-sm">
+            <TabsTrigger value="about" className="flex items-center space-x-2">
+              <User className="h-4 w-4" />
+              <span>About</span>
             </TabsTrigger>
-            <TabsTrigger value="comparison" className="flex items-center space-x-2">
-              <BarChart3 className="h-4 w-4" />
-              <span>Model Comparison</span>
+            <TabsTrigger value="experience" className="flex items-center space-x-2">
+              <span>Experience</span>
             </TabsTrigger>
-            <TabsTrigger value="metrics" className="flex items-center space-x-2">
-              <Activity className="h-4 w-4" />
-              <span>Performance Metrics</span>
+            <TabsTrigger value="education" className="flex items-center space-x-2">
+              <span>Education</span>
+            </TabsTrigger>
+            <TabsTrigger value="skills" className="flex items-center space-x-2">
+              <span>Skills</span>
+            </TabsTrigger>
+            <TabsTrigger value="projects" className="flex items-center space-x-2">
+              <span>Projects</span>
+            </TabsTrigger>
+            <TabsTrigger value="contact" className="flex items-center space-x-2">
+              <Mail className="h-4 w-4" />
+              <span>Contact</span>
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="chat">
-            <ChatInterface />
+          <TabsContent value="about">
+            <PersonalInfo />
           </TabsContent>
 
-          <TabsContent value="comparison">
-            <ModelComparison />
+          <TabsContent value="experience">
+            <Experience />
           </TabsContent>
 
-          <TabsContent value="metrics">
-            <PerformanceMetrics />
+          <TabsContent value="education">
+            <Education />
+          </TabsContent>
+
+          <TabsContent value="skills">
+            <Skills />
+          </TabsContent>
+
+          <TabsContent value="projects">
+            <Projects />
+          </TabsContent>
+
+          <TabsContent value="contact">
+            <Contact />
           </TabsContent>
         </Tabs>
       </div>
+
+      {/* Footer */}
+      <footer className="bg-white/80 backdrop-blur-sm border-t border-slate-200 mt-16">
+        <div className="max-w-6xl mx-auto px-4 py-8">
+          <div className="flex items-center justify-between">
+            <p className="text-slate-600">© 2024 John Doe. All rights reserved.</p>
+            <div className="flex items-center space-x-4">
+              <a href="#" className="text-slate-600 hover:text-slate-800 transition-colors">
+                <Github className="h-5 w-5" />
+              </a>
+              <a href="#" className="text-slate-600 hover:text-slate-800 transition-colors">
+                <Linkedin className="h-5 w-5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
